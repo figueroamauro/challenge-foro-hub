@@ -23,4 +23,8 @@ public class TopicResponse {
     public ResponseStatus getStatus() {
         return status;
     }
+
+    public void updateStatus(ResponseStatus responseStatus) {
+        this.status = responseStatus;
+    }
 }

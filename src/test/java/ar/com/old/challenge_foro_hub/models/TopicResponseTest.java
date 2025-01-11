@@ -14,4 +14,12 @@ public class TopicResponseTest {
         assertEquals("Message 1", topicResponse.getMessage());
         assertEquals(ResponseStatus.PENDING, topicResponse.getStatus());
     }
+
+    @Test
+    void shouldUpdateStatus() {
+        TopicResponse topicResponse = new TopicResponse(1L, "Message 1");
+
+        topicResponse.updateStatus(ResponseStatus.APPROVED);
+        assertEquals(ResponseStatus.APPROVED, topicResponse.getStatus());
+    }
 }
