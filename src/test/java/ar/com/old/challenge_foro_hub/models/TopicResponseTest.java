@@ -1,8 +1,12 @@
 package ar.com.old.challenge_foro_hub.models;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TopicResponseTest {
 
@@ -21,5 +25,16 @@ public class TopicResponseTest {
 
         topicResponse.updateStatus(ResponseStatus.APPROVED);
         assertEquals(ResponseStatus.APPROVED, topicResponse.getStatus());
+    }
+
+    @ParameterizedTest
+    @NullSource
+    void shouldFailUpdatingStatusAndThrowException_withNull(ResponseStatus responseStatus) {
+        TopicResponse topicResponse = new TopicResponse(1L, "Message 1");
+
+        Executable executable = () -> topicResponse.updateStatus(responseStatus);
+        Exception exception = assertThrows(IllegalArgumentException.class, executable);
+        assertEquals("Status cannot be null", exception.getMessage());
+
     }
 }

@@ -25,6 +25,9 @@ public class TopicResponse {
     }
 
     public void updateStatus(ResponseStatus responseStatus) {
+        if (responseStatus == null) {
+            throw new IllegalArgumentException("Status cannot be null");
+        }
         this.status = responseStatus;
     }
 }
