@@ -1,6 +1,8 @@
-package ar.com.old.challenge_foro_hub.models;
+package ar.com.old.challenge_foro_hub.models.entitites;
 
 
+
+import ar.com.old.challenge_foro_hub.models.Status;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,15 +18,28 @@ public class Topic {
     private final List<TopicResponse> responseList;
     private User user;
 
-    public Topic(Long id, String title, String message, User user) {
-        this.creationDate = LocalDateTime.now();
-        this.lastUpdateDate = LocalDateTime.now();
-        this.responseList = new ArrayList<>();
-        this.id = id;
+    public Topic(User user, String title, String message) {
+        this.id = null;
         this.title = title;
         this.message = message;
+        this.creationDate = LocalDateTime.now();
+        this.lastUpdateDate = this.creationDate;
+        this.responseList = new ArrayList<>();
         this.status = Status.OPEN;
         this.user = user;
+    }
+
+    public void addResponse(TopicResponse response) {
+        this.responseList.add(response);
+        this.updateLastUpdateDate();
+    }
+
+    public void updateStatus(Status status) {
+        this.status = status;
+    }
+
+    private void updateLastUpdateDate() {
+        this.lastUpdateDate = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -57,5 +72,17 @@ public class Topic {
 
     public List<TopicResponse> getResponseList() {
         return responseList;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

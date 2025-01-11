@@ -1,13 +1,14 @@
-package ar.com.old.challenge_foro_hub.models;
+package ar.com.old.challenge_foro_hub.models.entitites;
 
+
+import ar.com.old.challenge_foro_hub.models.ResponseStatus;
 
 public class TopicResponse {
     private Long id;
     private String message;
     private ResponseStatus status;
 
-    public TopicResponse(Long id, String message) {
-        this.id = id;
+    public TopicResponse( String message) {
         this.message = message;
         this.status = ResponseStatus.PENDING;
     }

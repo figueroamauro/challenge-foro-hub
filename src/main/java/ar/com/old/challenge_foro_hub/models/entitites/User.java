@@ -1,4 +1,4 @@
-package ar.com.old.challenge_foro_hub.models;
+package ar.com.old.challenge_foro_hub.models.entitites;
 
 public class User {
     private Long id;
@@ -27,5 +27,17 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

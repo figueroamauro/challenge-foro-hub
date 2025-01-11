@@ -1,5 +1,6 @@
 package ar.com.old.challenge_foro_hub.models;
 
+import ar.com.old.challenge_foro_hub.models.entitites.TopicResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;

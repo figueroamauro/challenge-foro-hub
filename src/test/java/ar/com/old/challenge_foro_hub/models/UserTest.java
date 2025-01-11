@@ -1,5 +1,6 @@
 package ar.com.old.challenge_foro_hub.models;
 
+import ar.com.old.challenge_foro_hub.models.entitites.User;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
