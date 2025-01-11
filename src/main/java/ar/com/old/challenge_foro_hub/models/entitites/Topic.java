@@ -3,19 +3,39 @@ package ar.com.old.challenge_foro_hub.models.entitites;
 
 
 import ar.com.old.challenge_foro_hub.models.Status;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "topics")
 public class Topic {
+
+    @Id
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "message")
     private String message;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
+
+    @Column(name = "creation_date")
     private final LocalDateTime creationDate;
+
+    @Column(name = "last_update_date")
     private LocalDateTime lastUpdateDate;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "topic")
     private final List<TopicResponse> responseList;
+
+    @OneToOne
     private User user;
 
     public Topic(User user, String title, String message) {
@@ -31,6 +51,7 @@ public class Topic {
 
     public void addResponse(TopicResponse response) {
         this.responseList.add(response);
+        response.setTopic(this);
         this.updateLastUpdateDate();
     }
 

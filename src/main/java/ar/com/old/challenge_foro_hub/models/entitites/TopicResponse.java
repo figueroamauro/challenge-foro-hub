@@ -2,11 +2,26 @@ package ar.com.old.challenge_foro_hub.models.entitites;
 
 
 import ar.com.old.challenge_foro_hub.models.ResponseStatus;
+import jakarta.persistence.*;
 
+
+@Entity
+@Table(name = "topic_response")
 public class TopicResponse {
+
+    @Id
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "message")
     private String message;
+
+  @Enumerated(EnumType.STRING)
     private ResponseStatus status;
+
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "topic_id", referencedColumnName = "id")
+  private Topic topic;
 
     public TopicResponse( String message) {
         this.message = message;
@@ -38,5 +53,13 @@ public class TopicResponse {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 }

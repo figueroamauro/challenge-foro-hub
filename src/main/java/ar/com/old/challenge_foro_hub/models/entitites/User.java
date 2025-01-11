@@ -1,10 +1,23 @@
 package ar.com.old.challenge_foro_hub.models.entitites;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "user_name")
     private String userName;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "email")
     private String email;
+
 
     public User(Long id, String name, String password, String email) {
         this.id = id;
@@ -12,6 +25,7 @@ public class User {
         this.password = password;
         this.email = email;
     }
+
 
     public Long getId() {
         return id;
@@ -27,6 +41,10 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setUserName(String userName) {
