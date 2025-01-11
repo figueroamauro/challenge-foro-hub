@@ -55,7 +55,7 @@ public class Topic {
         return lastUpdateDate;
     }
 
-    public List<Response> getResponseList() {
+    public List<TopicResponse> getResponseList() {
         return responseList;
     }
 }
