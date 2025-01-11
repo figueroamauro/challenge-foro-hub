@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -36,5 +37,13 @@ public class TopicResponseTest {
         Exception exception = assertThrows(IllegalArgumentException.class, executable);
         assertEquals("Status cannot be null", exception.getMessage());
 
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Message 10", "Message 20", "Message 30"})
+    void shouldSetNewMessage(String message) {
+        TopicResponse topicResponse = new TopicResponse(1L, "Message 1");
+        topicResponse.setMessage(message);
+        assertEquals(message, topicResponse.getMessage());
     }
 }

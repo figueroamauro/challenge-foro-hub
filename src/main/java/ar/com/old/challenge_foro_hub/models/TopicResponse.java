@@ -30,4 +30,12 @@ public class TopicResponse {
         }
         this.status = responseStatus;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
