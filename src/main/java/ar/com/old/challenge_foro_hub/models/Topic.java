@@ -1,7 +1,6 @@
 package ar.com.old.challenge_foro_hub.models;
 
 
-import org.apache.coyote.Response;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public class Topic {
     private Status status;
     private final LocalDateTime creationDate;
     private LocalDateTime lastUpdateDate;
-    private final List<Response> responseList;
+    private final List<TopicResponse> responseList;
     private User user;
 
     public Topic(Long id, String title, String message, User user) {
