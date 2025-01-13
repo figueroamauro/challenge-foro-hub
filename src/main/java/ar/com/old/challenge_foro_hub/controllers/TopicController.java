@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,13 +20,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/topics")
 public class TopicController {
 
-    @Autowired
-    private TopicService topicService;
+    private final TopicService topicService;
+
+    public TopicController(TopicService topicService) {
+        this.topicService = topicService;
+    }
 
     @GetMapping
-    public ResponseEntity<Page<TopicResponseDto>> finAll(@PageableDefault(size = 10) Pageable pageable) {
-        Page<Topic> topics = topicService.findAll(pageable);
-        return ResponseEntity.ok(topics.map(TopicResponseMapper::toDto));
+    public ResponseEntity<PagedModel<EntityModel<TopicResponseDto>>> finAll(@PageableDefault(size = 10) Pageable pageable, PagedResourcesAssembler<TopicResponseDto> pagedResourcesAssembler) {
+        Page<TopicResponseDto> topics = topicService.findAll(pageable).map(TopicResponseMapper::toDto);
+
+        return ResponseEntity.ok(pagedResourcesAssembler.toModel(topics));
     }
 
     @PostMapping
