@@ -35,7 +35,8 @@ public class Topic {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "topic")
     private final List<TopicResponse> responseList;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     public Topic() {
@@ -112,5 +113,9 @@ public class Topic {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -2,7 +2,9 @@ package ar.com.old.challenge_foro_hub.services;
 
 import ar.com.old.challenge_foro_hub.models.entitites.Topic;
 import ar.com.old.challenge_foro_hub.models.entitites.TopicResponse;
+import ar.com.old.challenge_foro_hub.models.entitites.User;
 import ar.com.old.challenge_foro_hub.repositories.TopicRepository;
+import ar.com.old.challenge_foro_hub.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,14 +17,21 @@ import java.util.Optional;
 public class TopicService {
     @Autowired
     private TopicRepository topicRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public Page<Topic> findAll(Pageable pageable) {
         return topicRepository.findAll(pageable);
     }
 
     @Transactional
-    public Topic save(Topic topic) {
+    public Topic save(Topic topic, Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()) {
+            topic.setUser(user.get());
         return topicRepository.save(topic);
+    }
+        throw new RuntimeException("User not found");
     }
 
     public Topic findById(Long id) {
