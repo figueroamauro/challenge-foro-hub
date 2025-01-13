@@ -1,5 +1,7 @@
 package ar.com.old.challenge_foro_hub.controllers;
 
+import ar.com.old.challenge_foro_hub.mappers.TopicRequestMapper;
+import ar.com.old.challenge_foro_hub.mappers.TopicResponseMapper;
 import ar.com.old.challenge_foro_hub.models.dtos.TopicRequestDto;
 import ar.com.old.challenge_foro_hub.models.dtos.TopicResponseDto;
 import ar.com.old.challenge_foro_hub.models.entitites.Topic;
@@ -21,28 +23,15 @@ public class TopicController {
     @GetMapping
     public ResponseEntity<Page<TopicResponseDto>> finAll(@PageableDefault(size = 10) Pageable pageable) {
         Page<Topic> topics = topicService.findAll(pageable);
-        return ResponseEntity.ok(mapToTopicResponseDto(topics));
+        return ResponseEntity.ok(topics.map(TopicResponseMapper::toDto));
     }
 
     @PostMapping
     public ResponseEntity<TopicResponseDto> save(@RequestBody TopicRequestDto topic) {
-        Topic newTopic = topicService.save(new Topic(null, topic.title(), topic.message()), topic.userId());
-        return ResponseEntity.ok(new TopicResponseDto(newTopic.getId(),
-                newTopic.getTitle(),
-                newTopic.getMessage(),
-                newTopic.getStatus(),
-                newTopic.getCreationDate(),
-                newTopic.getLastUpdateDate(),
-                newTopic.getUser().getUserName(),
-                newTopic.getUser().getEmail()));
+        Topic newTopic = topicService.save(TopicRequestMapper.toEntity(topic));
+        return ResponseEntity.ok(TopicResponseMapper.toDto(newTopic));
+
     }
 
 
-    private Page<TopicResponseDto> mapToTopicResponseDto(Page<Topic> all) {
-        return all.map(topic -> new TopicResponseDto(topic.getId(), topic.getTitle(), topic.getMessage(),topic.getStatus(),
-                topic.getCreationDate(),
-                topic.getLastUpdateDate(),
-                topic.getUser().getUserName(),
-                topic.getUser().getEmail()));
-    }
 }

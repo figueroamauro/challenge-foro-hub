@@ -25,8 +25,8 @@ public class TopicService {
     }
 
     @Transactional
-    public Topic save(Topic topic, Long userId) {
-        Optional<User> user = userRepository.findById(userId);
+    public Topic save(Topic topic) {
+        Optional<User> user = userRepository.findById(topic.getUser().getId());
         if (user.isPresent()) {
             topic.setUser(user.get());
         return topicRepository.save(topic);
