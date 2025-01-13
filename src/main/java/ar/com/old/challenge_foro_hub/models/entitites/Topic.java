@@ -38,6 +38,13 @@ public class Topic {
     @OneToOne
     private User user;
 
+    public Topic() {
+        this.creationDate = LocalDateTime.now();
+        this.lastUpdateDate = this.creationDate;
+        this.responseList = new ArrayList<>();
+        this.status = Status.OPEN;
+    }
+
     public Topic(User user, String title, String message) {
         this.id = null;
         this.title = title;

@@ -23,7 +23,12 @@ public class TopicResponse {
   @JoinColumn(name = "topic_id", referencedColumnName = "id")
   private Topic topic;
 
-    public TopicResponse( String message) {
+
+    public TopicResponse() {
+        this.status = ResponseStatus.PENDING;
+    }
+
+    public TopicResponse(String message) {
         this.message = message;
         this.status = ResponseStatus.PENDING;
     }

@@ -42,6 +42,16 @@ public class UserService {
     public User update(User user) {
         Optional<User> tmpUser = userRepository.findById(user.getId());
         if (tmpUser.isPresent()) {
+
+            if (user.getUserName() != null) {
+                tmpUser.get().setUserName(user.getUserName());
+            }
+            if (user.getPassword() != null) {
+                tmpUser.get().setPassword(user.getPassword());
+            }
+            if (user.getEmail() != null) {
+                tmpUser.get().setEmail(user.getEmail());
+            }
             return userRepository.save(tmpUser.get());
         }
         throw new RuntimeException("User not found");
