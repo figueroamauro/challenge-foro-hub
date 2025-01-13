@@ -17,7 +17,4 @@ public class TopicResponseMapper {
                 topic.getUser().getEmail());
     }
 
-    public  static Topic toEntity(TopicResponseDto topicResponseDto) {
-        return new Topic(new User(topicResponseDto.userId(), null, null, null), topicResponseDto.title(), topicResponseDto.message());
-    }
 }
