@@ -1,6 +1,7 @@
 package ar.com.old.challenge_foro_hub.services;
 
 import ar.com.old.challenge_foro_hub.models.entitites.Topic;
+import ar.com.old.challenge_foro_hub.models.entitites.TopicResponse;
 import ar.com.old.challenge_foro_hub.repositories.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,6 +48,16 @@ public class TopicService {
         if (tmpTopic.isPresent()) {
 
         return topicRepository.save(tmpTopic.get());
+        }
+        throw new RuntimeException("Topic not found");
+    }
+
+    @Transactional
+    public TopicResponse saveResponse(Long id, TopicResponse topicResponse) {
+        Optional<Topic> topic = topicRepository.findById(id);
+        if (topic.isPresent()) {
+            topic.get().addResponse(topicResponse);
+        return topicResponse;
         }
         throw new RuntimeException("Topic not found");
     }
