@@ -14,7 +14,7 @@ public class TopicResponseMapper {
                 topic.getUser().getId(),
                 topic.getUser().getUserName(),
                 topic.getUser().getEmail(),
-                topic.getResponseList());
+                topic.getComments());
     }
 
 }

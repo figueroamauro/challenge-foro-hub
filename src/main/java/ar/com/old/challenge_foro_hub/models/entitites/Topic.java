@@ -33,7 +33,7 @@ public class Topic {
     private LocalDateTime lastUpdateDate;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "topic")
-    private final List<TopicResponse> responseList;
+    private final List<TopicComment> comments;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -42,7 +42,7 @@ public class Topic {
     public Topic() {
         this.creationDate = LocalDateTime.now();
         this.lastUpdateDate = this.creationDate;
-        this.responseList = new ArrayList<>();
+        this.comments = new ArrayList<>();
         this.status = Status.OPEN;
     }
 
@@ -52,14 +52,14 @@ public class Topic {
         this.message = message;
         this.creationDate = LocalDateTime.now();
         this.lastUpdateDate = this.creationDate;
-        this.responseList = new ArrayList<>();
+        this.comments = new ArrayList<>();
         this.status = Status.OPEN;
         this.user = user;
     }
 
-    public void addResponse(TopicResponse response) {
-        this.responseList.add(response);
-        response.setTopic(this);
+    public void addComment(TopicComment comment) {
+        this.comments.add(comment);
+        comment.setTopic(this);
         this.updateLastUpdateDate();
     }
 
@@ -99,8 +99,8 @@ public class Topic {
         return lastUpdateDate;
     }
 
-    public List<TopicResponse> getResponseList() {
-        return responseList;
+    public List<TopicComment> getComments() {
+        return comments;
     }
 
     public void setId(Long id) {

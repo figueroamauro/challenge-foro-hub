@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "topic_response")
-public class TopicResponse {
+public class TopicComment {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -24,11 +24,11 @@ public class TopicResponse {
   private Topic topic;
 
 
-    public TopicResponse() {
+    public TopicComment() {
         this.status = ResponseStatus.PENDING;
     }
 
-    public TopicResponse(String message) {
+    public TopicComment(String message) {
         this.message = message;
         this.status = ResponseStatus.PENDING;
     }

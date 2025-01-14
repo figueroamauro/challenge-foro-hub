@@ -20,7 +20,7 @@ public class TopicTest {
         assertEquals(Status.OPEN, topic.getStatus());
         assertNotNull(topic.getCreationDate());
         assertNotNull(topic.getLastUpdateDate());
-        assertNotNull(topic.getResponseList());
+        assertNotNull(topic.getComments());
         assertNotNull(topic.getUser());
 
     }
