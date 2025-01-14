@@ -1,6 +1,6 @@
-package ar.com.old.challenge_foro_hub.mappers;
+package ar.com.old.challenge_foro_hub.mappers.topic;
 
-import ar.com.old.challenge_foro_hub.models.dtos.TopicResponseDto;
+import ar.com.old.challenge_foro_hub.dtos.topic.TopicResponseDto;
 import ar.com.old.challenge_foro_hub.models.entitites.Topic;
 
 public class TopicResponseMapper {

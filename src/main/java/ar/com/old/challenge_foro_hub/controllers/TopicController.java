@@ -1,12 +1,13 @@
 package ar.com.old.challenge_foro_hub.controllers;
 
-import ar.com.old.challenge_foro_hub.mappers.TopicRequestMapper;
-import ar.com.old.challenge_foro_hub.mappers.TopicResponseMapper;
-import ar.com.old.challenge_foro_hub.models.dtos.TopicRequestDto;
-import ar.com.old.challenge_foro_hub.models.dtos.TopicRequestUpdateDto;
-import ar.com.old.challenge_foro_hub.models.dtos.TopicResponseDto;
+import ar.com.old.challenge_foro_hub.mappers.topic.TopicRequestMapper;
+import ar.com.old.challenge_foro_hub.mappers.topic.TopicResponseMapper;
+import ar.com.old.challenge_foro_hub.dtos.topic.TopicRequestDto;
+import ar.com.old.challenge_foro_hub.dtos.topic.TopicRequestUpdateDto;
+import ar.com.old.challenge_foro_hub.dtos.topic.TopicResponseDto;
 import ar.com.old.challenge_foro_hub.models.entitites.Topic;
 import ar.com.old.challenge_foro_hub.services.TopicService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -48,7 +49,7 @@ public class TopicController {
     }
 
     @PutMapping
-    public ResponseEntity<TopicResponseDto> update(@RequestBody TopicRequestUpdateDto dto) {
+    public ResponseEntity<TopicResponseDto> update( @Valid @RequestBody TopicRequestUpdateDto dto) {
         Topic updatedTopic = topicService.update(TopicRequestMapper.toEntity(dto));
         return ResponseEntity.ok(TopicResponseMapper.toDto(updatedTopic));
     }

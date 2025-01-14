@@ -1,15 +1,11 @@
-package ar.com.old.challenge_foro_hub.mappers;
+package ar.com.old.challenge_foro_hub.mappers.topic;
 
-import ar.com.old.challenge_foro_hub.models.dtos.TopicRequestDto;
-import ar.com.old.challenge_foro_hub.models.dtos.TopicRequestUpdateDto;
+import ar.com.old.challenge_foro_hub.dtos.topic.TopicRequestDto;
+import ar.com.old.challenge_foro_hub.dtos.topic.TopicRequestUpdateDto;
 import ar.com.old.challenge_foro_hub.models.entitites.Topic;
 import ar.com.old.challenge_foro_hub.models.entitites.User;
 
 public class TopicRequestMapper {
-
-    public static TopicRequestDto toDto(Topic topic) {
-        return new TopicRequestDto(topic.getId(), topic.getTitle(), topic.getMessage(), topic.getUser().getId());
-    }
 
     public static Topic toEntity(TopicRequestUpdateDto topicRequestUpdateDto) {
         return new Topic(topicRequestUpdateDto.id(), null, topicRequestUpdateDto.title(), topicRequestUpdateDto.message());

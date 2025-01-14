@@ -1,13 +1,13 @@
 package ar.com.old.challenge_foro_hub.controllers;
 
-import ar.com.old.challenge_foro_hub.mappers.UserRequestMapper;
-import ar.com.old.challenge_foro_hub.mappers.UserResponseMapper;
-import ar.com.old.challenge_foro_hub.models.dtos.UserRequestDto;
-import ar.com.old.challenge_foro_hub.models.dtos.UserResponseDto;
+import ar.com.old.challenge_foro_hub.dtos.user.UserRequestUpdateDto;
+import ar.com.old.challenge_foro_hub.mappers.user.UserRequestMapper;
+import ar.com.old.challenge_foro_hub.mappers.user.UserResponseMapper;
+import ar.com.old.challenge_foro_hub.dtos.user.UserRequestDto;
+import ar.com.old.challenge_foro_hub.dtos.user.UserResponseDto;
 import ar.com.old.challenge_foro_hub.models.entitites.User;
 import ar.com.old.challenge_foro_hub.services.UserService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponseDto> save(@RequestBody @Valid UserRequestDto userDTO)  {
+    public ResponseEntity<UserResponseDto> save(@RequestBody UserRequestDto userDTO)  {
         User user = userService.save(UserRequestMapper.toEntity(userDTO));
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                                .path("/{id}")
@@ -53,7 +53,7 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<UserResponseDto> update(@RequestBody UserRequestDto userDTO) {
+    public ResponseEntity<UserResponseDto> update(@Valid @RequestBody UserRequestUpdateDto userDTO) {
         User user = userService.update(UserRequestMapper.toEntity(userDTO));
         return ResponseEntity.ok(UserResponseMapper.toDto(user));
     }

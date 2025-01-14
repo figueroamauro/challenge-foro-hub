@@ -1,4 +1,4 @@
-package ar.com.old.challenge_foro_hub.models.dtos;
+package ar.com.old.challenge_foro_hub.dtos.topic;
 
 import ar.com.old.challenge_foro_hub.models.Status;
 import ar.com.old.challenge_foro_hub.models.entitites.TopicResponse;
