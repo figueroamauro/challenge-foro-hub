@@ -1,7 +1,6 @@
 package ar.com.old.challenge_foro_hub.services;
 
 import ar.com.old.challenge_foro_hub.models.entitites.Topic;
-import ar.com.old.challenge_foro_hub.models.entitites.TopicResponse;
 import ar.com.old.challenge_foro_hub.models.entitites.User;
 import ar.com.old.challenge_foro_hub.repositories.TopicRepository;
 import ar.com.old.challenge_foro_hub.repositories.UserRepository;
@@ -29,8 +28,8 @@ public class TopicService {
         Optional<User> user = userRepository.findById(topic.getUser().getId());
         if (user.isPresent()) {
             topic.setUser(user.get());
-        return topicRepository.save(topic);
-    }
+            return topicRepository.save(topic);
+        }
         throw new RuntimeException("User not found");
     }
 
@@ -42,32 +41,33 @@ public class TopicService {
         throw new RuntimeException("Topic not found");
     }
 
+
+    public Topic update(Topic topic) {
+        if (topic.getId() == null) {
+            throw new RuntimeException("Topic not found");
+        }
+        Optional<Topic> tmpTopic = topicRepository.findById(topic.getId());
+        if (tmpTopic.isPresent()) {
+            if (topic.getTitle() != null) {
+                tmpTopic.get().setTitle(topic.getTitle());
+            }
+            if (topic.getMessage() != null) {
+                tmpTopic.get().setMessage(topic.getMessage());
+            }
+            return topicRepository.save(tmpTopic.get());
+        }
+        throw new RuntimeException("Topic not found");
+    }
+
+
     @Transactional
     public void deleteById(Long id) {
         Optional<Topic> tmpTopic = topicRepository.findById(id);
         if (tmpTopic.isPresent()) {
             topicRepository.deleteById(id);
+            return;
         }
         throw new RuntimeException("Topic not found");
     }
 
-    @Transactional
-    public Topic update(Topic topic) {
-        Optional<Topic> tmpTopic = topicRepository.findById(topic.getId());
-        if (tmpTopic.isPresent()) {
-
-        return topicRepository.save(tmpTopic.get());
-        }
-        throw new RuntimeException("Topic not found");
-    }
-
-    @Transactional
-    public TopicResponse saveResponse(Long id, TopicResponse topicResponse) {
-        Optional<Topic> topic = topicRepository.findById(id);
-        if (topic.isPresent()) {
-            topic.get().addResponse(topicResponse);
-        return topicResponse;
-        }
-        throw new RuntimeException("Topic not found");
-    }
 }

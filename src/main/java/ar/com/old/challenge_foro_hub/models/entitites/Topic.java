@@ -46,8 +46,8 @@ public class Topic {
         this.status = Status.OPEN;
     }
 
-    public Topic(User user, String title, String message) {
-        this.id = null;
+    public Topic(Long id,User user, String title, String message) {
+        this.id = id;
         this.title = title;
         this.message = message;
         this.creationDate = LocalDateTime.now();

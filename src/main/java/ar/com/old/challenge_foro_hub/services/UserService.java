@@ -36,6 +36,7 @@ public class UserService {
         Optional<User> tmpUser = userRepository.findById(id);
         if (tmpUser.isPresent()) {
             userRepository.deleteById(id);
+            return;
         }
         throw new RuntimeException("User not found");
     }
