@@ -11,20 +11,8 @@ import java.util.Date;
 
 @Service
 public class TokenService {
-
     @Value("${jwt.secret}")
     private String secretKey;
-
-
-
-    // Convierte la llave secreta en un formato compatible con HMAC-SHA256
-    private   Key getKey() {
-          return  new SecretKeySpec(
-                    secretKey.getBytes(),
-                    SignatureAlgorithm.HS256.getJcaName()
-            );
-    }
-
 
     private static final long EXPIRATION_TIME = 3600000;
 
@@ -33,7 +21,13 @@ public class TokenService {
                        .setSubject(username)
                        .setIssuedAt(new Date())
                        .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                       .signWith(getKey(), SignatureAlgorithm.HS256) // Firmar con HMAC-SHA256
+                       .signWith(convertToHMAC256Format(), SignatureAlgorithm.HS256) // Firmar con HMAC-SHA256
                        .compact();
     }
+
+    private   Key convertToHMAC256Format() {
+          return  new SecretKeySpec(secretKey.getBytes(),SignatureAlgorithm.HS256.getJcaName()
+            );
+    }
+
 }
