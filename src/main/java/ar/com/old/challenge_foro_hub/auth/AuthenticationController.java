@@ -1,6 +1,7 @@
 package ar.com.old.challenge_foro_hub.auth;
 
 import ar.com.old.challenge_foro_hub.dtos.user.UserRequestDto;
+import ar.com.old.challenge_foro_hub.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,10 +19,14 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping
     public ResponseEntity<String> login(@RequestBody UserRequestDto userRequestDto) {
         Authentication token = new UsernamePasswordAuthenticationToken(userRequestDto.userName(), userRequestDto.password());
-        authenticationManager.authenticate(token);
-        return ResponseEntity.ok("Login successful");
+        Authentication authUser = authenticationManager.authenticate(token);
+        String tokenJWT = TokenService.generateToken(authUser.getName());
+        return ResponseEntity.ok(tokenJWT);
     }
 }
