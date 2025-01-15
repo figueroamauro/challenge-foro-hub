@@ -19,7 +19,10 @@ public class TopicService {
     @Autowired
     private UserRepository userRepository;
 
-    public Page<Topic> findAll(Pageable pageable) {
+    public Page<Topic> findAll(Pageable pageable, String userName) {
+        if (userName != null && !userName.isEmpty()) {
+            return topicRepository.findAllByUserName(userName, pageable);
+        }
         return topicRepository.findAll(pageable);
     }
 

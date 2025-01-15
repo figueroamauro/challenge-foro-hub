@@ -1,13 +1,13 @@
 package ar.com.old.challenge_foro_hub.models.entitites;
 
 
-import ar.com.old.challenge_foro_hub.models.ResponseStatus;
+import ar.com.old.challenge_foro_hub.models.CommentStatus;
 import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "topic_response")
-public class TopicComment {
+@Table(name = "comments")
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -17,20 +17,28 @@ public class TopicComment {
     private String message;
 
   @Enumerated(EnumType.STRING)
-    private ResponseStatus status;
+    private CommentStatus status;
 
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "topic_id", referencedColumnName = "id")
   private Topic topic;
 
 
-    public TopicComment() {
-        this.status = ResponseStatus.PENDING;
+    public Comment() {
+        this.status = CommentStatus.ACCEPTED;
     }
 
-    public TopicComment(String message) {
+    public Comment(String message, Topic topic) {
+        this.topic = topic;
         this.message = message;
-        this.status = ResponseStatus.PENDING;
+        this.status = CommentStatus.ACCEPTED;
+    }
+
+    public Comment(Long id,String message, Topic topic) {
+        this.id = id;
+        this.topic = topic;
+        this.message = message;
+        this.status = CommentStatus.ACCEPTED;
     }
 
     public Long getId() {
@@ -41,11 +49,11 @@ public class TopicComment {
         return message;
     }
 
-    public ResponseStatus getStatus() {
+    public CommentStatus getStatus() {
         return status;
     }
 
-    public void updateStatus(ResponseStatus responseStatus) {
+    public void updateStatus(CommentStatus responseStatus) {
         if (responseStatus == null) {
             throw new IllegalArgumentException("Status cannot be null");
         }

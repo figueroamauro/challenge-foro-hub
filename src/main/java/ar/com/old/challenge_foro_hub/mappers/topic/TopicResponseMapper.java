@@ -1,6 +1,7 @@
 package ar.com.old.challenge_foro_hub.mappers.topic;
 
 import ar.com.old.challenge_foro_hub.dtos.topic.TopicResponseDto;
+import ar.com.old.challenge_foro_hub.mappers.comment.CommentResponseMapper;
 import ar.com.old.challenge_foro_hub.models.entitites.Topic;
 
 public class TopicResponseMapper {
@@ -14,7 +15,7 @@ public class TopicResponseMapper {
                 topic.getUser().getId(),
                 topic.getUser().getUserName(),
                 topic.getUser().getEmail(),
-                topic.getComments());
+                topic.getComments().stream().map(CommentResponseMapper::toDto).toList());
     }
 
 }

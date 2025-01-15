@@ -29,8 +29,9 @@ public class TopicController {
 
     @GetMapping
     public ResponseEntity<PagedModel<EntityModel<TopicResponseDto>>> finAll(@PageableDefault(size = 10) Pageable pageable,
-                                                                            PagedResourcesAssembler<TopicResponseDto> pagedResourcesAssembler) {
-        Page<TopicResponseDto> topics = topicService.findAll(pageable).map(TopicResponseMapper::toDto);
+                                                                            PagedResourcesAssembler<TopicResponseDto> pagedResourcesAssembler,
+                                                                            @RequestParam(required = false) String userName) {
+        Page<TopicResponseDto> topics = topicService.findAll(pageable, userName).map(TopicResponseMapper::toDto);
 
         return ResponseEntity.ok(pagedResourcesAssembler.toModel(topics));
     }

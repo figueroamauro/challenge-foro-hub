@@ -32,8 +32,8 @@ public class Topic {
     @Column(name = "last_update_date")
     private LocalDateTime lastUpdateDate;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "topic")
-    private final List<TopicComment> comments;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "topic", orphanRemoval = true)
+    private final List<Comment> comments;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -57,7 +57,7 @@ public class Topic {
         this.user = user;
     }
 
-    public void addComment(TopicComment comment) {
+    public void addComment(Comment comment) {
         this.comments.add(comment);
         comment.setTopic(this);
         this.updateLastUpdateDate();
@@ -99,7 +99,7 @@ public class Topic {
         return lastUpdateDate;
     }
 
-    public List<TopicComment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
