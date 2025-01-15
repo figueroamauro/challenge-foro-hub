@@ -5,6 +5,7 @@ import ar.com.old.challenge_foro_hub.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,6 +15,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public Page<User> findAll(Pageable pageable) {
         return userRepository.findAll(pageable);
@@ -28,6 +32,8 @@ public class UserService {
     }
 
     public User save(User user) {
+        String encodedPass = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPass);
         return userRepository.save(user);
     }
 

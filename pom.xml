@@ -80,6 +80,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>[1.0, 2.0)</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
