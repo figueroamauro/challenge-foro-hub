@@ -1,6 +1,7 @@
 package ar.com.old.challenge_foro_hub.auth;
 
 import ar.com.old.challenge_foro_hub.dtos.user.UserRequestDto;
+import ar.com.old.challenge_foro_hub.security.JWTTokenDto;
 import ar.com.old.challenge_foro_hub.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +24,10 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<String> login(@RequestBody UserRequestDto userRequestDto) {
+    public ResponseEntity<JWTTokenDto> login(@RequestBody UserRequestDto userRequestDto) {
         Authentication token = new UsernamePasswordAuthenticationToken(userRequestDto.userName(), userRequestDto.password());
         Authentication authUser = authenticationManager.authenticate(token);
-        String tokenJWT = TokenService.generateToken(authUser.getName());
-        return ResponseEntity.ok(tokenJWT);
+        String tokenJWT = tokenService.generateToken(authUser.getName());
+        return ResponseEntity.ok(new JWTTokenDto(tokenJWT));
     }
 }
