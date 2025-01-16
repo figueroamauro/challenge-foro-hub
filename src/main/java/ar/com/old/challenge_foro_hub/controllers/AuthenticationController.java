@@ -1,7 +1,7 @@
-package ar.com.old.challenge_foro_hub.security.auth;
+package ar.com.old.challenge_foro_hub.controllers;
 
 import ar.com.old.challenge_foro_hub.dtos.user.UserRequestDto;
-import ar.com.old.challenge_foro_hub.security.JWTTokenDto;
+import ar.com.old.challenge_foro_hub.dtos.auth.JWTTokenDto;
 import ar.com.old.challenge_foro_hub.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

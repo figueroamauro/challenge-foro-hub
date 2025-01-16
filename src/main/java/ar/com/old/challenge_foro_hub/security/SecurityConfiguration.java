@@ -1,5 +1,6 @@
 package ar.com.old.challenge_foro_hub.security;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +32,10 @@ public class SecurityConfiguration {
                            req.requestMatchers(HttpMethod.GET, "/**").permitAll();
                            req.anyRequest().authenticated();
                        })
+                       .exceptionHandling(ex -> ex.authenticationEntryPoint((request, response, authException) -> {
+                           response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                           response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+                       }))
                       .addFilterBefore(loginFilter, UsernamePasswordAuthenticationFilter.class)
                        .build();
     }

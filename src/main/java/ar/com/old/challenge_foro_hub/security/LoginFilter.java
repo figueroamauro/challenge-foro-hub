@@ -32,8 +32,8 @@ public class LoginFilter extends OncePerRequestFilter {
                 if (claims.getSubject() != null) {
                     setAuthentication(claims);
                 }
-            } catch (Exception e) {
-               throw new RuntimeException("invalid token " + e.getMessage());
+            }catch (Exception e) {
+                SecurityContextHolder.clearContext();
             }
 
         }
