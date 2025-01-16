@@ -1,5 +1,6 @@
 package ar.com.old.challenge_foro_hub.security;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +24,13 @@ public class TokenService {
                        .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                        .signWith(convertToHMAC256Format(), SignatureAlgorithm.HS256) // Firmar con HMAC-SHA256
                        .compact();
+    }
+
+    public Claims validateToken(String token) {
+        return Jwts.parser()
+                       .setSigningKey(convertToHMAC256Format())
+                       .parseClaimsJws(token)
+                       .getBody();
     }
 
     private   Key convertToHMAC256Format() {

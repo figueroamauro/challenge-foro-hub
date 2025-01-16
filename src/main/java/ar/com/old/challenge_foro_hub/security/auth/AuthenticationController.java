@@ -1,4 +1,4 @@
-package ar.com.old.challenge_foro_hub.auth;
+package ar.com.old.challenge_foro_hub.security.auth;
 
 import ar.com.old.challenge_foro_hub.dtos.user.UserRequestDto;
 import ar.com.old.challenge_foro_hub.security.JWTTokenDto;
