@@ -24,17 +24,25 @@ public class Comment {
   private Topic topic;
 
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+
+
     public Comment() {
         this.status = CommentStatus.ACCEPTED;
     }
 
-    public Comment(String message, Topic topic) {
+    public Comment(String message, Topic topic, User user) {
+        this.user = user;
         this.topic = topic;
         this.message = message;
         this.status = CommentStatus.ACCEPTED;
     }
 
-    public Comment(Long id,String message, Topic topic) {
+    public Comment(Long id,String message, Topic topic, User user) {
+        this.user = user;
         this.id = id;
         this.topic = topic;
         this.message = message;
@@ -74,5 +82,13 @@ public class Comment {
 
     public void setTopic(Topic topic) {
         this.topic = topic;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

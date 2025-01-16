@@ -32,16 +32,15 @@ public class LoginFilter extends OncePerRequestFilter {
             try {
                 token = formatToken(token);
                 Claims claims = tokenService.validateToken(token);
-                System.out.println("ASDASD");
                 if (claims.getSubject() != null) {
                     setAuthentication(claims);
                 }
             }catch (Exception e) {
-                SecurityContextHolder.clearContext();
+               SecurityContextHolder.clearContext();
+                System.out.println("token invalido");
             }
 
         }
-        System.out.println("login filter");
         filterChain.doFilter(request, response);
 
     }
@@ -50,8 +49,8 @@ public class LoginFilter extends OncePerRequestFilter {
         String username = claims.getSubject();
         List<GrantedAuthority> authorities = List.of(); // Agrega roles si es necesario
         User user = (User) authenticationService.loadUserByUsername(username);
-
-        Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
+        SecurityContextHolder.clearContext();
+        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 

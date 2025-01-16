@@ -26,18 +26,19 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         System.out.println("spring filter");
         return http.csrf(AbstractHttpConfigurer::disable)
+                       .addFilterBefore(loginFilter, UsernamePasswordAuthenticationFilter.class)
                        .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                        .authorizeHttpRequests(req -> {
+                           req.requestMatchers(HttpMethod.GET, "/**").permitAll();
                            req.requestMatchers(HttpMethod.POST, "/login").permitAll();
                            req.requestMatchers(HttpMethod.POST, "/users").permitAll();
-                           req.requestMatchers(HttpMethod.GET, "/**").permitAll();
+                           req.requestMatchers(HttpMethod.POST, "/logouts").permitAll();
                            req.anyRequest().authenticated();
                        })
                        .exceptionHandling(ex -> ex.authenticationEntryPoint((request, response, authException) -> {
                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
                        }))
-                      .addFilterBefore(loginFilter, UsernamePasswordAuthenticationFilter.class)
                        .build();
     }
 

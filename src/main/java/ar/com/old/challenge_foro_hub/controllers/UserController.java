@@ -1,6 +1,5 @@
 package ar.com.old.challenge_foro_hub.controllers;
 
-import ar.com.old.challenge_foro_hub.dtos.user.UserRequestUpdateDto;
 import ar.com.old.challenge_foro_hub.mappers.user.UserRequestMapper;
 import ar.com.old.challenge_foro_hub.mappers.user.UserResponseMapper;
 import ar.com.old.challenge_foro_hub.dtos.user.UserRequestDto;
@@ -14,6 +13,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -43,8 +43,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponseDto> save(@RequestBody UserRequestDto userDTO)  {
-        User user = userService.save(UserRequestMapper.toEntity(userDTO));
+    public ResponseEntity<UserResponseDto> save(@RequestBody UserRequestDto dto)  {
+        User user = userService.save(UserRequestMapper.toEntity(dto));
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                                .path("/{id}")
                                .buildAndExpand(user.getId())
@@ -53,9 +53,13 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<UserResponseDto> update(@Valid @RequestBody UserRequestUpdateDto userDTO) {
-        User user = userService.update(UserRequestMapper.toEntity(userDTO));
-        return ResponseEntity.ok(UserResponseMapper.toDto(user));
+    public ResponseEntity<UserResponseDto> update(@Valid @RequestBody UserRequestDto dto) {
+        User userContext = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = UserRequestMapper.toEntity(dto);
+        user.setId(userContext.getId());
+        User updatedUser = userService.update(user);
+        return ResponseEntity.ok(UserResponseMapper.toDto(updatedUser));
+
     }
 
     @DeleteMapping("/{id}")

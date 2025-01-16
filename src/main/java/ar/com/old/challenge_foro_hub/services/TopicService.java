@@ -28,12 +28,8 @@ public class TopicService {
 
     @Transactional
     public Topic save(Topic topic) {
-        Optional<User> user = userRepository.findById(topic.getUser().getId());
-        if (user.isPresent()) {
-            topic.setUser(user.get());
-            return topicRepository.save(topic);
-        }
-        throw new RuntimeException("User not found");
+        topic.setId(null);
+        return topicRepository.save(topic);
     }
 
     public Topic findById(Long id) {

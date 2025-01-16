@@ -1,7 +1,6 @@
 package ar.com.old.challenge_foro_hub.controllers;
 
 import ar.com.old.challenge_foro_hub.dtos.comment.CommentRequestDto;
-import ar.com.old.challenge_foro_hub.dtos.comment.CommentRequestUpdateDto;
 import ar.com.old.challenge_foro_hub.dtos.comment.CommentResponseDto;
 import ar.com.old.challenge_foro_hub.mappers.comment.CommentRequestMapper;
 import ar.com.old.challenge_foro_hub.mappers.comment.CommentResponseMapper;
@@ -39,14 +38,14 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity<CommentResponseDto> save(@RequestBody @Valid CommentRequestDto comment) {
-        Comment newComment = commentService.save(CommentRequestMapper.toEntity(comment));
+    public ResponseEntity<CommentResponseDto> save(@RequestBody @Valid CommentRequestDto dto) {
+        Comment newComment = commentService.save(CommentRequestMapper.toEntity(dto));
         return ResponseEntity.ok(CommentResponseMapper.toDto(newComment));
     }
 
     @PutMapping
-    public ResponseEntity<CommentResponseDto> update(@Valid @RequestBody CommentRequestUpdateDto comment) {
-        Comment updatedComment = commentService.update(CommentRequestMapper.toEntity(comment));
+    public ResponseEntity<CommentResponseDto> update(@Valid @RequestBody CommentRequestDto dto) {
+        Comment updatedComment = commentService.update(CommentRequestMapper.toEntity(dto));
         return ResponseEntity.ok(CommentResponseMapper.toDto(updatedComment));
     }
 

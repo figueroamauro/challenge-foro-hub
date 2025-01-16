@@ -6,6 +6,6 @@ import ar.com.old.challenge_foro_hub.models.entitites.Comment;
 public class CommentResponseMapper {
 
     public static CommentResponseDto toDto(Comment comment) {
-        return new CommentResponseDto(comment.getId(),comment.getMessage(),comment.getStatus(),comment.getTopic().getUser().getUserName());
+        return new CommentResponseDto(comment.getId(),comment.getMessage(),comment.getStatus(),comment.getUser().getUserName());
     }
 }

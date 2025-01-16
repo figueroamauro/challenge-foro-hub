@@ -1,5 +1,6 @@
 package ar.com.old.challenge_foro_hub.security;
 
+import ar.com.old.challenge_foro_hub.models.entitites.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -17,10 +18,10 @@ public class TokenService {
 
     private static final long EXPIRATION_TIME = 3600000;
 
-    public  String generateToken(String username,Long id) {
+    public  String generateToken(User user) {
         return Jwts.builder()
-                       .setSubject(username)
-                       .claim("id", id)
+                       .setSubject(user.getUserName())
+                       .claim("id", user.getId())
                        .setIssuedAt(new Date())
                        .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                        .signWith(convertToHMAC256Format(), SignatureAlgorithm.HS256) // Firmar con HMAC-SHA256

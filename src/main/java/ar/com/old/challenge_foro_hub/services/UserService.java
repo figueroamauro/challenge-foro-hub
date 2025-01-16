@@ -54,7 +54,8 @@ public class UserService {
                 tmpUser.get().setUserName(user.getUserName());
             }
             if (user.getPassword() != null) {
-                tmpUser.get().setPassword(user.getPassword());
+                String encodedPass = passwordEncoder.encode(user.getPassword());
+                tmpUser.get().setPassword(encodedPass);
             }
             if (user.getEmail() != null) {
                 tmpUser.get().setEmail(user.getEmail());

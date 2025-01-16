@@ -3,9 +3,9 @@ package ar.com.old.challenge_foro_hub.controllers;
 import ar.com.old.challenge_foro_hub.mappers.topic.TopicRequestMapper;
 import ar.com.old.challenge_foro_hub.mappers.topic.TopicResponseMapper;
 import ar.com.old.challenge_foro_hub.dtos.topic.TopicRequestDto;
-import ar.com.old.challenge_foro_hub.dtos.topic.TopicRequestUpdateDto;
 import ar.com.old.challenge_foro_hub.dtos.topic.TopicResponseDto;
 import ar.com.old.challenge_foro_hub.models.entitites.Topic;
+import ar.com.old.challenge_foro_hub.models.entitites.User;
 import ar.com.old.challenge_foro_hub.services.TopicService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -15,6 +15,7 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -37,9 +38,9 @@ public class TopicController {
     }
 
     @PostMapping
-    public ResponseEntity<TopicResponseDto> save(@RequestBody TopicRequestDto topic) {
-        Topic newTopic = topicService.save(TopicRequestMapper.toEntity(topic));
-        return ResponseEntity.ok(TopicResponseMapper.toDto(newTopic));
+    public ResponseEntity<TopicResponseDto> save(@RequestBody TopicRequestDto dto) {
+        Topic topic =  topicService.save(TopicRequestMapper.toEntity(dto));
+        return ResponseEntity.ok(TopicResponseMapper.toDto(topic));
 
     }
 
@@ -50,9 +51,9 @@ public class TopicController {
     }
 
     @PutMapping
-    public ResponseEntity<TopicResponseDto> update( @Valid @RequestBody TopicRequestUpdateDto dto) {
-        Topic updatedTopic = topicService.update(TopicRequestMapper.toEntity(dto));
-        return ResponseEntity.ok(TopicResponseMapper.toDto(updatedTopic));
+    public ResponseEntity<TopicResponseDto> update( @Valid @RequestBody TopicRequestDto dto) {
+        Topic topic = topicService.update(TopicRequestMapper.toEntity(dto));
+        return ResponseEntity.ok(TopicResponseMapper.toDto(topic));
     }
 
     @DeleteMapping("/{id}")

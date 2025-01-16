@@ -2,8 +2,10 @@ package ar.com.old.challenge_foro_hub.services;
 
 import ar.com.old.challenge_foro_hub.models.entitites.Comment;
 import ar.com.old.challenge_foro_hub.models.entitites.Topic;
+import ar.com.old.challenge_foro_hub.models.entitites.User;
 import ar.com.old.challenge_foro_hub.repositories.CommentRepository;
 import ar.com.old.challenge_foro_hub.repositories.TopicRepository;
+import ar.com.old.challenge_foro_hub.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +21,8 @@ public class CommentService {
     private CommentRepository commentRepository;
     @Autowired
     private TopicRepository topicRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public Comment findById(Long id) {
         Optional<Comment> tmpComment = commentRepository.findById(id);
@@ -50,6 +54,8 @@ public class CommentService {
     @Transactional
     public Comment save(Comment comment) {
         Optional<Topic> topic = topicRepository.findById(comment.getTopic().getId());
+        Optional<User> user = userRepository.findById(comment.getUser().getId());
+        comment.setUser(user.get());
         if (topic.isPresent()) {
             comment.setTopic(topic.get());
             topic.get().addComment(comment);
