@@ -2,6 +2,7 @@ package ar.com.old.challenge_foro_hub.controllers;
 
 import ar.com.old.challenge_foro_hub.dtos.user.UserRequestDto;
 import ar.com.old.challenge_foro_hub.dtos.auth.JWTTokenDto;
+import ar.com.old.challenge_foro_hub.models.entitites.User;
 import ar.com.old.challenge_foro_hub.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +26,11 @@ public class AuthenticationController {
 
     @PostMapping
     public ResponseEntity<JWTTokenDto> login(@RequestBody UserRequestDto userRequestDto) {
+        System.out.println("controller");
         Authentication token = new UsernamePasswordAuthenticationToken(userRequestDto.userName(), userRequestDto.password());
         Authentication authUser = authenticationManager.authenticate(token);
-        String tokenJWT = tokenService.generateToken(authUser.getName());
+        User user = (User) authUser.getPrincipal();
+        String tokenJWT = tokenService.generateToken(authUser.getName(), user.getId());
         return ResponseEntity.ok(new JWTTokenDto(tokenJWT));
     }
 }

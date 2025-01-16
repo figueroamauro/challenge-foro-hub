@@ -1,5 +1,6 @@
 package ar.com.old.challenge_foro_hub.security;
 
+import ar.com.old.challenge_foro_hub.models.entitites.User;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +21,8 @@ public class LoginFilter extends OncePerRequestFilter {
 
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private AuthenticationService authenticationService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -29,6 +32,7 @@ public class LoginFilter extends OncePerRequestFilter {
             try {
                 token = formatToken(token);
                 Claims claims = tokenService.validateToken(token);
+                System.out.println("ASDASD");
                 if (claims.getSubject() != null) {
                     setAuthentication(claims);
                 }
@@ -37,7 +41,7 @@ public class LoginFilter extends OncePerRequestFilter {
             }
 
         }
-
+        System.out.println("login filter");
         filterChain.doFilter(request, response);
 
     }
@@ -45,6 +49,8 @@ public class LoginFilter extends OncePerRequestFilter {
     private void setAuthentication(Claims claims) {
         String username = claims.getSubject();
         List<GrantedAuthority> authorities = List.of(); // Agrega roles si es necesario
+        User user = (User) authenticationService.loadUserByUsername(username);
+
         Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }

@@ -17,9 +17,10 @@ public class TokenService {
 
     private static final long EXPIRATION_TIME = 3600000;
 
-    public  String generateToken(String username) {
+    public  String generateToken(String username,Long id) {
         return Jwts.builder()
                        .setSubject(username)
+                       .claim("id", id)
                        .setIssuedAt(new Date())
                        .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                        .signWith(convertToHMAC256Format(), SignatureAlgorithm.HS256) // Firmar con HMAC-SHA256
