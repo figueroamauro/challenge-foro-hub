@@ -1,5 +1,6 @@
 package ar.com.old.challenge_foro_hub.models.entitites;
 
+import ar.com.old.challenge_foro_hub.validators.UserValidator;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,6 +29,7 @@ public class User implements UserDetails {
     }
 
     public User(Long id, String name, String password, String email) {
+        UserValidator.validateName(name);
         this.id = id;
         this.userName = name;
         this.password = password;

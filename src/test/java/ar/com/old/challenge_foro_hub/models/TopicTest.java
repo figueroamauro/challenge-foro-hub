@@ -11,8 +11,7 @@ public class TopicTest {
 
     @Test
     void shouldCreateInstance_withValidParams() {
-        Topic topic = new Topic(1L, "Title 1", "Message 1",
-                new User(1L, "test", "test", "test"));
+        Topic topic = new Topic(1L, new User(), "Title 1", "Message 1");
 
         assertEquals(1L, topic.getId());
         assertEquals("Title 1", topic.getTitle());
