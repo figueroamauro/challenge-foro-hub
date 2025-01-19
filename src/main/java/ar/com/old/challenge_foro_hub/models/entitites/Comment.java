@@ -2,6 +2,7 @@ package ar.com.old.challenge_foro_hub.models.entitites;
 
 
 import ar.com.old.challenge_foro_hub.models.CommentStatus;
+import ar.com.old.challenge_foro_hub.validators.CommentValidator;
 import jakarta.persistence.*;
 
 
@@ -35,6 +36,7 @@ public class Comment {
     }
 
     public Comment(String message, Topic topic, User user) {
+        CommentValidator.validateMessage(message);
         this.user = user;
         this.topic = topic;
         this.message = message;
@@ -42,6 +44,8 @@ public class Comment {
     }
 
     public Comment(Long id,String message, Topic topic, User user) {
+        CommentValidator.validateMessage(message);
+        CommentValidator.validateId(id);
         this.user = user;
         this.id = id;
         this.topic = topic;
@@ -69,10 +73,12 @@ public class Comment {
     }
 
     public void setId(Long id) {
+        CommentValidator.validateId(id);
         this.id = id;
     }
 
     public void setMessage(String message) {
+        CommentValidator.validateMessage(message);
         this.message = message;
     }
 
