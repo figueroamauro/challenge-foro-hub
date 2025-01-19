@@ -3,6 +3,7 @@ package ar.com.old.challenge_foro_hub.models.entitites;
 
 
 import ar.com.old.challenge_foro_hub.models.Status;
+import ar.com.old.challenge_foro_hub.validators.TopicValidator;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -47,6 +48,10 @@ public class Topic {
     }
 
     public Topic(Long id,User user, String title, String message) {
+        TopicValidator.validateTitle(title);
+        TopicValidator.validateMessage(message);
+        TopicValidator.validateId(id);
+
         this.id = id;
         this.title = title;
         this.message = message;
@@ -104,14 +109,17 @@ public class Topic {
     }
 
     public void setId(Long id) {
+        TopicValidator.validateId(id);
         this.id = id;
     }
 
     public void setTitle(String title) {
+        TopicValidator.validateTitle(title);
         this.title = title;
     }
 
     public void setMessage(String message) {
+        TopicValidator.validateMessage(message);
         this.message = message;
     }
 
