@@ -28,13 +28,13 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(Long id, String name, String password, String email) {
-        UserValidator.validateUserName(name);
+    public User(Long id, String userName, String password, String email) {
+        UserValidator.validateUserName(userName);
         UserValidator.validateEmail(email);
         UserValidator.validatePassword(password);
         UserValidator.validateId(id);
         this.id = id;
-        this.userName = name;
+        this.userName = userName;
         this.password = password;
         this.email = email;
     }
@@ -87,18 +87,22 @@ public class User implements UserDetails {
     }
 
     public void setId(Long id) {
+        UserValidator.validateId(id);
         this.id = id;
     }
 
     public void setUserName(String userName) {
+        UserValidator.validateUserName(userName);
         this.userName = userName;
     }
 
     public void setPassword(String password) {
+        UserValidator.validatePassword(password);
         this.password = password;
     }
 
     public void setEmail(String email) {
+        UserValidator.validateEmail(email);
         this.email = email;
     }
 }

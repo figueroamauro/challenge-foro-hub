@@ -18,7 +18,7 @@ public class TopicCommentTest {
 
         assertEquals(1L, topicResponse.getId());
         assertEquals("Message 1", topicResponse.getMessage());
-        assertEquals(CommentStatus.PENDING, topicResponse.getStatus());
+        assertEquals(CommentStatus.ACCEPTED, topicResponse.getStatus());
     }
 
     @Test

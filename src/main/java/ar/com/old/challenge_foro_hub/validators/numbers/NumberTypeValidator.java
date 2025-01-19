@@ -2,10 +2,9 @@ package ar.com.old.challenge_foro_hub.validators.numbers;
 
 import ar.com.old.challenge_foro_hub.validators.Validator;
 
-import java.util.Set;
 
 public enum NumberTypeValidator {
-
+    NULL(new NumberNullValidator()),
     NEGATIVE(new NumberNegativeValidator());
 
 
