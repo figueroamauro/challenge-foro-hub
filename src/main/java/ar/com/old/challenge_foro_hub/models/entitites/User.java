@@ -29,7 +29,10 @@ public class User implements UserDetails {
     }
 
     public User(Long id, String name, String password, String email) {
-        UserValidator.validateName(name);
+        UserValidator.validateUserName(name);
+        UserValidator.validateEmail(email);
+        UserValidator.validatePassword(password);
+        UserValidator.validateId(id);
         this.id = id;
         this.userName = name;
         this.password = password;

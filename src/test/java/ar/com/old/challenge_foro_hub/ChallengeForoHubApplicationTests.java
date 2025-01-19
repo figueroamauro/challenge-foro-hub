@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ChallengeForoHubApplicationTests {
 	public static void main(String[] args) {
 
-	User user = new User(1L, "", "Password 1", "Email 1");
+	User user = new User(-1L, "asd", "Password 1", "Email 1");
 	}
 
 
