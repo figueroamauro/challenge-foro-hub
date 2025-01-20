@@ -4,10 +4,10 @@ import ar.com.old.challenge_foro_hub.exceptions.validators.NumberValidationExcep
 import ar.com.old.challenge_foro_hub.exceptions.validators.ValidationException;
 import ar.com.old.challenge_foro_hub.validators.Validator;
 
-public class NumberNegativeValidator implements Validator<Double> {
+public class NumberNegativeValidator implements Validator<Integer> {
 
     @Override
-    public void validate(Double number) throws ValidationException {
+    public void validate(Integer number) throws ValidationException {
         if (number < 0) {
             throw new NumberValidationException("El campo no puede ser negativo");
         }

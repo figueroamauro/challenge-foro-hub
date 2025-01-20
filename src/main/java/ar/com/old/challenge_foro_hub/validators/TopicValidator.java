@@ -31,7 +31,7 @@ public class TopicValidator {
         NumberValidator validator = NumberValidatorBuilder.create()
                                             .add(NumberTypeValidator.NEGATIVE)
                                             .build();
-        validator.validate(Double.valueOf(id));
+        validator.validate(Math.toIntExact(id));
     }
 
 

@@ -11,7 +11,7 @@ public class NumberValidator {
         this.validators = validators;
     }
 
-    public void validate(Double value) throws ValidationException {
+    public void validate(Integer value) throws ValidationException {
         for (NumberTypeValidator validator : validators) {
             validator.validate(value);
         }

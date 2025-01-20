@@ -8,13 +8,13 @@ public enum NumberTypeValidator {
     NEGATIVE(new NumberNegativeValidator());
 
 
-    private final Validator<Double> validator;
+    private final Validator<Integer> validator;
 
-    NumberTypeValidator(Validator<Double> validator) {
+    NumberTypeValidator(Validator<Integer> validator) {
         this.validator = validator;
     }
 
-    public void validate(Double value) {
+    public void validate(Integer value) {
         this.validator.validate(value);
     }
 }

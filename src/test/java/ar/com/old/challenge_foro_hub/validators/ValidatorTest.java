@@ -2,6 +2,7 @@ package ar.com.old.challenge_foro_hub.validators;
 
 import ar.com.old.challenge_foro_hub.exceptions.StringValidationException;
 import ar.com.old.challenge_foro_hub.exceptions.validators.NumberValidationException;
+import ar.com.old.challenge_foro_hub.validators.numbers.NumberNegativeValidator;
 import ar.com.old.challenge_foro_hub.validators.numbers.NumberNullValidator;
 import ar.com.old.challenge_foro_hub.validators.strings.StringEmptyValidator;
 import ar.com.old.challenge_foro_hub.validators.strings.StringNullValidator;
@@ -70,7 +71,16 @@ public class ValidatorTest {
             assertEquals("El campo no puede ser nulo", exception.getMessage());
         }
 
+@ParameterizedTest
+        @ValueSource(ints = {-1, -222, -3000})
+        void shouldThrowException_withNegative(Integer value) {
+            validator = new NumberNegativeValidator();
 
+            Exception exception = assertThrows(NumberValidationException.class, () -> {
+                validator.validate(value);
+            });
+            assertEquals("El campo no puede ser negativo", exception.getMessage());
+        }
     }
 
 }
