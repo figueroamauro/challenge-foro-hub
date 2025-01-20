@@ -1,7 +1,6 @@
 package ar.com.old.challenge_foro_hub.validators.strings;
 
 
-import ar.com.old.challenge_foro_hub.validators.strings.StringTooLongValidator;
 import ar.com.old.challenge_foro_hub.validators.Validator;
 
 public enum StringTypeValidator {
@@ -12,7 +11,7 @@ public enum StringTypeValidator {
     TOO_LONG_100(new StringTooLongValidator(100)),
     NULL(new StringNullValidator()),
     BLANK(new StringBlankValidator()),
-    IS_EMPTY(new StringEmptyValidator());
+    EMPTY(new StringEmptyValidator());
 
     private final Validator<String> validator;
 

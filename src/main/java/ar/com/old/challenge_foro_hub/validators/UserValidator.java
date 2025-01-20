@@ -12,7 +12,8 @@ public class UserValidator {
     public static void validateUserName(String name) {
         StringValidator validator = StringValidatorBuilder.create()
                                             .add(StringTypeValidator.TOO_LONG_30)
-                                            .add(StringTypeValidator.BLANK)
+                                            .add(StringTypeValidator.NULL)
+                                            .add(StringTypeValidator.EMPTY)
                                             .build();
         validator.validate(name);
     }
@@ -20,7 +21,8 @@ public class UserValidator {
     public static void validatePassword(String password) {
         StringValidator validator = StringValidatorBuilder.create()
                                             .add(StringTypeValidator.TOO_LONG_30)
-                                            .add(StringTypeValidator.BLANK)
+                                            .add(StringTypeValidator.NULL)
+                                            .add(StringTypeValidator.EMPTY)
                                             .build();
         validator.validate(password);
     }
@@ -28,7 +30,8 @@ public class UserValidator {
     public static void validateEmail(String email) {
         StringValidator validator = StringValidatorBuilder.create()
                                             .add(StringTypeValidator.TOO_LONG_50)
-                                            .add(StringTypeValidator.BLANK)
+                                            .add(StringTypeValidator.NULL)
+                                            .add(StringTypeValidator.EMPTY)
                                             .build();
         validator.validate(email);
     }

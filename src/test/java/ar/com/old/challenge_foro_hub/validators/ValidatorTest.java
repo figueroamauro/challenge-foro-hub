@@ -1,6 +1,8 @@
 package ar.com.old.challenge_foro_hub.validators;
 
 import ar.com.old.challenge_foro_hub.exceptions.StringValidationException;
+import ar.com.old.challenge_foro_hub.validators.strings.StringBlankValidator;
+import ar.com.old.challenge_foro_hub.validators.strings.StringNullValidator;
 import ar.com.old.challenge_foro_hub.validators.strings.StringTooLongValidator;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class ValidatorTest {
@@ -21,6 +24,17 @@ public class ValidatorTest {
             validator.validate(value);
         });
        assertEquals("El campo debe tener menos de " + (value.length()-1) + " caracteres", exception.getMessage());
+    }
+
+    @ParameterizedTest
+    @NullSource
+    void shouldNotThrowException_withNullAndEmpty(String value) {
+        Validator validator = new StringNullValidator();
+
+        Exception exception =  assertThrows(StringValidationException.class, () -> {
+            validator.validate(value);
+        });
+        assertEquals("El campo no puede ser nulo", exception.getMessage());
     }
 
 }
