@@ -12,7 +12,8 @@ public class CommentValidator {
     public static void validateMessage(String message) {
         StringValidator validator = StringValidatorBuilder.create()
                                             .add(StringTypeValidator.TOO_LONG_100)
-                                            .add(StringTypeValidator.BLANK)
+                                            .add(StringTypeValidator.NULL)
+                                            .add(StringTypeValidator.EMPTY)
                                             .build();
         validator.validate(message);
     }

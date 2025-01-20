@@ -2,6 +2,7 @@ ar/com/old/challenge_foro_hub/security/AuthenticationService.class
 ar/com/old/challenge_foro_hub/validators/numbers/NumberTypeValidator.class
 ar/com/old/challenge_foro_hub/models/Status.class
 ar/com/old/challenge_foro_hub/controllers/UserController.class
+ar/com/old/challenge_foro_hub/validators/numbers/NumberNullValidator.class
 ar/com/old/challenge_foro_hub/ChallengeForoHubApplication.class
 ar/com/old/challenge_foro_hub/validators/UserValidator.class
 ar/com/old/challenge_foro_hub/controllers/AuthenticationController.class
@@ -20,9 +21,9 @@ ar/com/old/challenge_foro_hub/controllers/CommentController.class
 ar/com/old/challenge_foro_hub/validators/numbers/NumberValidator.class
 ar/com/old/challenge_foro_hub/validators/numbers/NumberValidatorBuilder.class
 ar/com/old/challenge_foro_hub/dtos/topic/TopicRequestDto.class
-ar/com/old/challenge_foro_hub/validators/strings/StringBlankValidator.class
 ar/com/old/challenge_foro_hub/controllers/TopicController.class
 ar/com/old/challenge_foro_hub/mappers/topic/TopicRequestMapper.class
+ar/com/old/challenge_foro_hub/validators/TopicValidator.class
 ar/com/old/challenge_foro_hub/exceptions/StringValidationException.class
 ar/com/old/challenge_foro_hub/mappers/comment/CommentResponseMapper.class
 ar/com/old/challenge_foro_hub/validators/strings/StringEmptyValidator.class
@@ -32,6 +33,7 @@ ar/com/old/challenge_foro_hub/dtos/topic/TopicResponseDto.class
 ar/com/old/challenge_foro_hub/exceptions/validators/ValidationException.class
 ar/com/old/challenge_foro_hub/dtos/comment/CommentResponseDto.class
 ar/com/old/challenge_foro_hub/security/LoginFilter.class
+ar/com/old/challenge_foro_hub/validators/CommentValidator.class
 ar/com/old/challenge_foro_hub/models/entitites/Topic.class
 ar/com/old/challenge_foro_hub/models/entitites/User.class
 ar/com/old/challenge_foro_hub/repositories/CommentRepository.class

@@ -12,7 +12,8 @@ public class TopicValidator {
     public static void validateTitle(String title) {
         StringValidator validator = StringValidatorBuilder.create()
                                             .add(StringTypeValidator.TOO_LONG_50)
-                                            .add(StringTypeValidator.BLANK)
+                                            .add(StringTypeValidator.NULL)
+                                            .add(StringTypeValidator.EMPTY)
                                             .build();
         validator.validate(title);
     }
@@ -20,7 +21,8 @@ public class TopicValidator {
     public static void validateMessage(String message) {
         StringValidator validator = StringValidatorBuilder.create()
                                             .add(StringTypeValidator.TOO_LONG_100)
-                                            .add(StringTypeValidator.BLANK)
+                                            .add(StringTypeValidator.NULL)
+                                            .add(StringTypeValidator.EMPTY)
                                             .build();
         validator.validate(message);
     }

@@ -10,7 +10,6 @@ public enum StringTypeValidator {
     TOO_LONG_50(new StringTooLongValidator(50)),
     TOO_LONG_100(new StringTooLongValidator(100)),
     NULL(new StringNullValidator()),
-    BLANK(new StringBlankValidator()),
     EMPTY(new StringEmptyValidator());
 
     private final Validator<String> validator;

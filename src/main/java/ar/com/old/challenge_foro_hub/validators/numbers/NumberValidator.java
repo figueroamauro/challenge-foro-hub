@@ -1,7 +1,6 @@
 package ar.com.old.challenge_foro_hub.validators.numbers;
 
 import ar.com.old.challenge_foro_hub.exceptions.validators.ValidationException;
-import ar.com.old.challenge_foro_hub.validators.strings.StringTypeValidator;
 
 import java.util.Set;
 

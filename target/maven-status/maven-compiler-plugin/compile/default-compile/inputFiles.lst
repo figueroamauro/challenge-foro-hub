@@ -34,13 +34,15 @@
 /home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/services/CommentService.java
 /home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/services/TopicService.java
 /home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/services/UserService.java
+/home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/validators/CommentValidator.java
+/home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/validators/TopicValidator.java
 /home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/validators/UserValidator.java
 /home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/validators/Validator.java
 /home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/validators/numbers/NumberNegativeValidator.java
+/home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/validators/numbers/NumberNullValidator.java
 /home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/validators/numbers/NumberTypeValidator.java
 /home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/validators/numbers/NumberValidator.java
 /home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/validators/numbers/NumberValidatorBuilder.java
-/home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/validators/strings/StringBlankValidator.java
 /home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/validators/strings/StringEmptyValidator.java
 /home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/validators/strings/StringNullValidator.java
 /home/fmdev/proyectos/challenge-foro-hub/src/main/java/ar/com/old/challenge_foro_hub/validators/strings/StringTooLongValidator.java
