@@ -28,6 +28,9 @@ public class TopicValidator {
     }
 
     public static void validateId(Long id) {
+        if (id == null) {
+            return;
+        }
         NumberValidator validator = NumberValidatorBuilder.create()
                                             .add(NumberTypeValidator.NEGATIVE)
                                             .build();

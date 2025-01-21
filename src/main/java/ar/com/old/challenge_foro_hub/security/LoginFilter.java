@@ -2,6 +2,7 @@ package ar.com.old.challenge_foro_hub.security;
 
 import ar.com.old.challenge_foro_hub.models.entitites.User;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -35,14 +36,16 @@ public class LoginFilter extends OncePerRequestFilter {
                 if (claims.getSubject() != null) {
                     setAuthentication(claims);
                 }
-            }catch (Exception e) {
-               SecurityContextHolder.clearContext();
-                System.out.println("token invalido");
+                filterChain.doFilter(request, response);
+            } catch (MalformedJwtException e) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.setContentType("application/json");
+                response.getWriter().write("{\"error\": \"Token inválido\"}");
+                return;
             }
-
+        } else {
+            filterChain.doFilter(request, response);
         }
-        filterChain.doFilter(request, response);
-
     }
 
     private void setAuthentication(Claims claims) {

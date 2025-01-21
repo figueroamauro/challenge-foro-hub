@@ -10,7 +10,9 @@ public class CommentRequestMapper {
     public static Comment toEntity(CommentRequestDto dto) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(user.getUserName());
-        return new Comment(dto.message(), new Topic(dto.topicId(),user,null,null), user);
+        Topic topic = new Topic();
+        topic.setId(dto.topicId());
+        return new Comment(dto.message(),topic, user);
     }
 
 }
