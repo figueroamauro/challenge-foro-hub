@@ -35,10 +35,6 @@ public class SecurityConfiguration {
                            req.requestMatchers(HttpMethod.POST, "/logouts").permitAll();
                            req.anyRequest().authenticated();
                        })
-                       .exceptionHandling(ex -> ex.authenticationEntryPoint((request, response, authException) -> {
-                           response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                           response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
-                       }))
                        .build();
     }
 
