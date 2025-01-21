@@ -20,7 +20,7 @@ public class UserValidator {
 
     public static void validatePassword(String password) {
         StringValidator validator = StringValidatorBuilder.create()
-                                            .add(StringTypeValidator.TOO_LONG_30)
+                                            .add(StringTypeValidator.TOO_LONG_100)
                                             .add(StringTypeValidator.NULL)
                                             .add(StringTypeValidator.EMPTY)
                                             .build();
@@ -37,6 +37,9 @@ public class UserValidator {
     }
 
     public static void validateId(Long id) {
+        if (id == null) {
+            return;
+        }
         NumberValidator validator = NumberValidatorBuilder.create()
                                             .add(NumberTypeValidator.NEGATIVE)
                                             .build();
