@@ -1,5 +1,6 @@
 package ar.com.old.challenge_foro_hub.services;
 
+import ar.com.old.challenge_foro_hub.exceptions.TopicNotFoundException;
 import ar.com.old.challenge_foro_hub.models.entitites.Topic;
 import ar.com.old.challenge_foro_hub.models.entitites.User;
 import ar.com.old.challenge_foro_hub.repositories.TopicRepository;
@@ -37,13 +38,13 @@ public class TopicService {
         if (topic.isPresent()) {
             return topic.get();
         }
-        throw new RuntimeException("Topic not found");
+        throw new TopicNotFoundException("Topic not found");
     }
 
 
     public Topic update(Topic topic) {
         if (topic.getId() == null) {
-            throw new RuntimeException("Topic not found");
+            throw new TopicNotFoundException("Topic not found");
         }
         Optional<Topic> tmpTopic = topicRepository.findById(topic.getId());
         if (tmpTopic.isPresent()) {
@@ -55,7 +56,7 @@ public class TopicService {
             }
             return topicRepository.save(tmpTopic.get());
         }
-        throw new RuntimeException("Topic not found");
+        throw new TopicNotFoundException("Topic not found");
     }
 
 
@@ -66,7 +67,7 @@ public class TopicService {
             topicRepository.deleteById(id);
             return;
         }
-        throw new RuntimeException("Topic not found");
+        throw new TopicNotFoundException("Topic not found");
     }
 
 }
