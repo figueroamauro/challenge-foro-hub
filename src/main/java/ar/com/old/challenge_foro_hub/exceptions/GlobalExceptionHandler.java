@@ -31,5 +31,37 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(TopicNotFoundException.class)
+    public ResponseEntity<Object> handleStringValidation(TopicNotFoundException ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+
+    @ExceptionHandler(CommentNotFoundException.class)
+    public ResponseEntity<Object> handleStringValidation(CommentNotFoundException ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Object> handleStringValidation(UserNotFoundException ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+
 
 }
