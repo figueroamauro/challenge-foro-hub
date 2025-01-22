@@ -2,7 +2,6 @@ package ar.com.old.challenge_foro_hub.services;
 
 import ar.com.old.challenge_foro_hub.exceptions.TopicNotFoundException;
 import ar.com.old.challenge_foro_hub.models.entitites.Topic;
-import ar.com.old.challenge_foro_hub.models.entitites.User;
 import ar.com.old.challenge_foro_hub.repositories.TopicRepository;
 import ar.com.old.challenge_foro_hub.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

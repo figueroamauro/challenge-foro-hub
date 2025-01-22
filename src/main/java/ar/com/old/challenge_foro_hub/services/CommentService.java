@@ -1,5 +1,7 @@
 package ar.com.old.challenge_foro_hub.services;
 
+import ar.com.old.challenge_foro_hub.exceptions.CommentNotFoundException;
+import ar.com.old.challenge_foro_hub.exceptions.TopicNotFoundException;
 import ar.com.old.challenge_foro_hub.models.entitites.Comment;
 import ar.com.old.challenge_foro_hub.models.entitites.Topic;
 import ar.com.old.challenge_foro_hub.models.entitites.User;
@@ -29,7 +31,7 @@ public class CommentService {
         if (tmpComment.isPresent()) {
             return tmpComment.get();
         }
-        throw new RuntimeException("Comment not found");
+        throw new CommentNotFoundException("Comment not found");
     }
 
     public Page<Comment> findAllByIdTopic(Pageable pageable,Long topicId, String userName) {
@@ -49,7 +51,7 @@ public class CommentService {
             }
             return commentRepository.save(tmpComment.get());
         }
-        throw new RuntimeException("Comment not found");
+        throw new CommentNotFoundException("Comment not found");
     }
 
     @Transactional
@@ -62,7 +64,7 @@ public class CommentService {
             topic.get().addComment(comment);
             return commentRepository.save(comment);
         }
-        throw new RuntimeException("Topic not found");
+        throw new TopicNotFoundException("Topic not found");
     }
 
     public void deleteById(Long id) {
@@ -70,7 +72,7 @@ public class CommentService {
         if (tmpComment.isPresent()) {
             commentRepository.deleteById(id);
         }
-        throw new RuntimeException("Comment not found");
+        throw new CommentNotFoundException("Comment not found");
     }
 
 
