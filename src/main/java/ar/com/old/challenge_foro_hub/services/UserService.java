@@ -1,5 +1,6 @@
 package ar.com.old.challenge_foro_hub.services;
 
+import ar.com.old.challenge_foro_hub.exceptions.UserNotFoundException;
 import ar.com.old.challenge_foro_hub.models.entitites.User;
 import ar.com.old.challenge_foro_hub.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class UserService {
         if (user.isPresent()) {
             return user.get();
         }
-        throw new RuntimeException("User not found");
+        throw new UserNotFoundException("User not found");
     }
 
     public User save(User user) {
@@ -43,7 +44,7 @@ public class UserService {
             userRepository.deleteById(id);
             return;
         }
-        throw new RuntimeException("User not found");
+        throw new UserNotFoundException("User not found");
     }
 
     public User update(User user) {
@@ -62,7 +63,7 @@ public class UserService {
             }
             return userRepository.save(tmpUser.get());
         }
-        throw new RuntimeException("User not found");
+        throw new UserNotFoundException("User not found");
     }
 
 
