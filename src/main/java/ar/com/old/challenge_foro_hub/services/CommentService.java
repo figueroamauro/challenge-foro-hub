@@ -33,11 +33,12 @@ public class CommentService {
     }
 
     public Page<Comment> findAllByIdTopic(Pageable pageable,Long topicId, String userName) {
-        if (userName != null && !userName.isEmpty()) {
+        if (isBlank(userName)) {
             return commentRepository.findAllByUserName(userName, pageable);
         }
         return commentRepository.findAllByTopicId(pageable, topicId);
     }
+
 
     @Transactional
     public Comment update(Comment comment) {
@@ -73,4 +74,7 @@ public class CommentService {
     }
 
 
+    private static boolean isBlank(String userName) {
+        return userName != null && !userName.isEmpty();
+    }
 }
