@@ -2,6 +2,7 @@ package ar.com.old.challenge_foro_hub.security;
 
 import ar.com.old.challenge_foro_hub.models.entitites.User;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,7 +38,7 @@ public class LoginFilter extends OncePerRequestFilter {
                     setAuthentication(claims);
                 }
                 filterChain.doFilter(request, response);
-            } catch (MalformedJwtException e) {
+            } catch (MalformedJwtException |   ExpiredJwtException e) {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 response.setContentType("application/json");
                 response.getWriter().write("{\"error\": \"Token inválido\"}");

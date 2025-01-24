@@ -28,7 +28,6 @@ public class SecurityConfiguration {
                        .addFilterBefore(loginFilter, UsernamePasswordAuthenticationFilter.class)
                        .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                        .authorizeHttpRequests(req -> {
-                           req.requestMatchers(HttpMethod.GET, "/**").permitAll();
                            req.requestMatchers(HttpMethod.POST, "/login").permitAll();
                            req.requestMatchers(HttpMethod.POST, "/users").permitAll();
                            req.requestMatchers(HttpMethod.POST, "/logouts").permitAll();
