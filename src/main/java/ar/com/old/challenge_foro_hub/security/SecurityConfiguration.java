@@ -32,6 +32,12 @@ public class SecurityConfiguration {
                            req.requestMatchers(HttpMethod.POST, "/users").permitAll();
                            req.anyRequest().authenticated();
                        })
+                       .exceptionHandling(ex -> ex.authenticationEntryPoint((request, response, authException) -> {
+                           response.sendError(401,"Acceso denegado: debes iniciar sesion");
+                       }))
+                       .exceptionHandling(ex -> ex.accessDeniedHandler((request, response, accessDeniedException) -> {
+                           response.sendError(HttpServletResponse.SC_FORBIDDEN, "Acceso denegado: no tienes permiso para acceder a este recurso");
+                       }))
                        .build();
     }
 
