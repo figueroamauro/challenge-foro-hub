@@ -2,7 +2,7 @@ package ar.com.old.challenge_foro_hub.models.entitites;
 
 
 
-import ar.com.old.challenge_foro_hub.models.Status;
+import ar.com.old.challenge_foro_hub.enumerations.Status;
 import ar.com.old.challenge_foro_hub.validators.TopicValidator;
 import jakarta.persistence.*;
 

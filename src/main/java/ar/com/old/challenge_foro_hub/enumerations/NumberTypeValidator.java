@@ -1,6 +1,8 @@
-package ar.com.old.challenge_foro_hub.validators.numbers;
+package ar.com.old.challenge_foro_hub.enumerations;
 
 import ar.com.old.challenge_foro_hub.validators.Validator;
+import ar.com.old.challenge_foro_hub.validators.numbers.NumberNegativeValidator;
+import ar.com.old.challenge_foro_hub.validators.numbers.NumberNullValidator;
 
 
 public enum NumberTypeValidator {

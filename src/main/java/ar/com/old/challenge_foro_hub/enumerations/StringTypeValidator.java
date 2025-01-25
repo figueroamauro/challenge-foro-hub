@@ -1,7 +1,10 @@
-package ar.com.old.challenge_foro_hub.validators.strings;
+package ar.com.old.challenge_foro_hub.enumerations;
 
 
 import ar.com.old.challenge_foro_hub.validators.Validator;
+import ar.com.old.challenge_foro_hub.validators.strings.StringEmptyValidator;
+import ar.com.old.challenge_foro_hub.validators.strings.StringNullValidator;
+import ar.com.old.challenge_foro_hub.validators.strings.StringTooLongValidator;
 
 public enum StringTypeValidator {
 
