@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: ar.com.old.challenge_foro_hub.models.UserTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in ar.com.old.challenge_foro_hub.models.UserTest
