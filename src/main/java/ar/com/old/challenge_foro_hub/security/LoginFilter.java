@@ -30,7 +30,10 @@ public class LoginFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader("Authorization");
 
+        System.out.println("inicio filter");
+
         if (!isEmptyToken(token)) {
+            System.out.println("con token");
             try {
                 token = formatToken(token);
                 Claims claims = tokenService.validateToken(token);
@@ -45,6 +48,7 @@ public class LoginFilter extends OncePerRequestFilter {
                 return;
             }
         } else {
+            System.out.println("sin token");
             filterChain.doFilter(request, response);
         }
     }

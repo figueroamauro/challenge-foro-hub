@@ -2,6 +2,7 @@ package ar.com.old.challenge_foro_hub.exceptions;
 
 import ar.com.old.challenge_foro_hub.exceptions.validators.NumberValidationException;
 
+import ar.com.old.challenge_foro_hub.exceptions.validators.StringValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,8 +12,8 @@ import org.springframework.web.context.request.WebRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ar.com.old.challenge_foro_hub.exceptions.StringValidationException.class)
-    public ResponseEntity<Object> handleStringValidation(ar.com.old.challenge_foro_hub.exceptions.StringValidationException ex, WebRequest request) {
+    @ExceptionHandler(StringValidationException.class)
+    public ResponseEntity<Object> handleStringValidation(StringValidationException ex, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(
                 HttpStatus.BAD_REQUEST.value(),
                 ex.getMessage(),
@@ -63,5 +64,14 @@ public class GlobalExceptionHandler {
     }
 
 
+    @ExceptionHandler(IncorrectLoginException.class)
+    public ResponseEntity<Object> handleStringValidation(IncorrectLoginException ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
 
 }

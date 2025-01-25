@@ -1,4 +1,4 @@
-package ar.com.old.challenge_foro_hub.exceptions;
+package ar.com.old.challenge_foro_hub.exceptions.validators;
 
 import ar.com.old.challenge_foro_hub.exceptions.validators.ValidationException;
 

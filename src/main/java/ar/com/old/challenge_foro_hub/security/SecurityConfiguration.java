@@ -30,7 +30,6 @@ public class SecurityConfiguration {
                        .authorizeHttpRequests(req -> {
                            req.requestMatchers(HttpMethod.POST, "/login").permitAll();
                            req.requestMatchers(HttpMethod.POST, "/users").permitAll();
-                           req.requestMatchers(HttpMethod.POST, "/logouts").permitAll();
                            req.anyRequest().authenticated();
                        })
                        .build();

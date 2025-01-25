@@ -2,6 +2,7 @@ package ar.com.old.challenge_foro_hub.controllers;
 
 import ar.com.old.challenge_foro_hub.dtos.user.UserRequestDto;
 import ar.com.old.challenge_foro_hub.dtos.auth.JWTTokenDto;
+import ar.com.old.challenge_foro_hub.exceptions.IncorrectLoginException;
 import ar.com.old.challenge_foro_hub.models.entitites.User;
 import ar.com.old.challenge_foro_hub.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,15 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<JWTTokenDto> login(@RequestBody UserRequestDto userRequestDto) {
+    public ResponseEntity<?> login(@RequestBody UserRequestDto userRequestDto) {
         SecurityContextHolder.clearContext();
         SecurityContextHolder.setContext(SecurityContextHolder.createEmptyContext());
         Authentication token = new UsernamePasswordAuthenticationToken(userRequestDto.userName(), userRequestDto.password());
+        try {
+            authenticationManager.authenticate(token);
+        } catch (Exception e) {
+           throw new IncorrectLoginException("Credenciales incorrectas");
+        }
         Authentication authUser = authenticationManager.authenticate(token);
         User user = (User) authUser.getPrincipal();
         System.out.println(user.getUserName());
