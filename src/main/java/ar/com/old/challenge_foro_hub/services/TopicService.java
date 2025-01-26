@@ -59,11 +59,11 @@ public class TopicService {
     }
 
 
-    @Transactional
     public void deleteById(Long id) {
         Optional<Topic> tmpTopic = topicRepository.findById(id);
         if (tmpTopic.isPresent()) {
-            topicRepository.deleteById(id);
+            System.out.println(tmpTopic.get().getUser().getId());
+            topicRepository.deleteTopicById(id);
             return;
         }
         throw new TopicNotFoundException("Topic not found");

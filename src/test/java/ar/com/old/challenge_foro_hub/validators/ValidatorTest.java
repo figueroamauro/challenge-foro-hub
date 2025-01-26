@@ -1,6 +1,6 @@
 package ar.com.old.challenge_foro_hub.validators;
 
-import ar.com.old.challenge_foro_hub.exceptions.StringValidationException;
+import ar.com.old.challenge_foro_hub.exceptions.validators.StringValidationException;
 import ar.com.old.challenge_foro_hub.exceptions.validators.NumberValidationException;
 import ar.com.old.challenge_foro_hub.validators.numbers.NumberNegativeValidator;
 import ar.com.old.challenge_foro_hub.validators.numbers.NumberNullValidator;

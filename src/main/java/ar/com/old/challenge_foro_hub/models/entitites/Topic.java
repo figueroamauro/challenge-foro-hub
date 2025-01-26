@@ -2,7 +2,7 @@ package ar.com.old.challenge_foro_hub.models.entitites;
 
 
 
-import ar.com.old.challenge_foro_hub.models.Status;
+import ar.com.old.challenge_foro_hub.enumerations.Status;
 import ar.com.old.challenge_foro_hub.validators.TopicValidator;
 import jakarta.persistence.*;
 
@@ -33,11 +33,11 @@ public class Topic {
     @Column(name = "last_update_date")
     private LocalDateTime lastUpdateDate;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "topic", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "topic")
     private final List<Comment> comments;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "id" ,nullable = false)
     private User user;
 
     public Topic() {

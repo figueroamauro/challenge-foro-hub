@@ -1,5 +1,6 @@
 package ar.com.old.challenge_foro_hub.models;
 
+import ar.com.old.challenge_foro_hub.enumerations.CommentStatus;
 import ar.com.old.challenge_foro_hub.models.entitites.Comment;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;

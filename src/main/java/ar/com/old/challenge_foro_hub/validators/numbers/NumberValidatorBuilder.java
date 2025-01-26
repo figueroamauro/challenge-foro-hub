@@ -1,5 +1,7 @@
 package ar.com.old.challenge_foro_hub.validators.numbers;
 
+import ar.com.old.challenge_foro_hub.enumerations.NumberTypeValidator;
+
 import java.util.HashSet;
 import java.util.Set;
 

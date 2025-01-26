@@ -1,7 +1,7 @@
 package ar.com.old.challenge_foro_hub.models.entitites;
 
 
-import ar.com.old.challenge_foro_hub.models.CommentStatus;
+import ar.com.old.challenge_foro_hub.enumerations.CommentStatus;
 import ar.com.old.challenge_foro_hub.validators.CommentValidator;
 import jakarta.persistence.*;
 
